@@ -55,7 +55,7 @@ namespace Carica\Io\React {
      */
     public function setTimeout(callable $callback, int $milliseconds): EventListener {
       $timer = $this->_loop->addTimer($milliseconds / 1000, $callback);
-      return new LoopEvents\StreamReadEvent($this, $timer);
+      return new LoopEvents\TimerEvent($this, $timer);
     }
 
     /**
@@ -65,7 +65,7 @@ namespace Carica\Io\React {
      */
     public function setInterval(callable $callback, int $milliseconds): EventListener {
       $timer = $this->_loop->addPeriodicTimer($milliseconds / 1000, $callback);
-      return new LoopEvents\StreamReadEvent($this, $timer);
+      return new LoopEvents\TimerEvent($this, $timer);
     }
 
     /**
