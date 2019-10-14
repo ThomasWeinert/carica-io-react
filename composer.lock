@@ -12,15 +12,17 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/ThomasWeinert/carica-io.git",
-                "reference": "9db81562b61448b6afdf47c903a6415de88036a9"
+                "reference": "cb4a3a75e6f60916fd14cf901df5ca9775e7d700"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/ThomasWeinert/carica-io/zipball/9db81562b61448b6afdf47c903a6415de88036a9",
-                "reference": "9db81562b61448b6afdf47c903a6415de88036a9",
+                "url": "https://api.github.com/repos/ThomasWeinert/carica-io/zipball/cb4a3a75e6f60916fd14cf901df5ca9775e7d700",
+                "reference": "cb4a3a75e6f60916fd14cf901df5ca9775e7d700",
                 "shasum": ""
             },
             "require": {
+                "ext-dom": "*",
+                "ext-fileinfo": "*",
                 "php": ">=7.3"
             },
             "type": "library",
@@ -45,7 +47,7 @@
                 "asynchronous-io",
                 "non-blocking-io"
             ],
-            "time": "2019-10-14T11:27:03+00:00"
+            "time": "2019-10-14T16:06:23+00:00"
         },
         {
             "name": "react/event-loop",

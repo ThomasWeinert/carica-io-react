@@ -4,23 +4,32 @@ declare(strict_types=1);
 namespace Carica\Io\React {
 
   use Carica\Io;
+  use Carica\Io\Deferred\Promise;
   use Carica\Io\Event\Loop as EventLoop;
   use Carica\Io\Event\Loop\Listener as EventListener;
+  use Exception;
   use React\EventLoop as ReactEventLoop;
   use React\EventLoop\LoopInterface as ReactEventLoopInterface;
 
   class LoopAdapter implements EventLoop {
 
     /**
-     * @var ReactEventLoop\LoopInterface
+     * @var ReactEventLoopInterface
      */
     private $_loop;
 
-    public function __construct(ReactEventLoop\LoopInterface $loop) {
+    /**
+     * @param ReactEventLoopInterface $loop
+     */
+    public function __construct(ReactEventLoopInterface $loop) {
       $this->_loop = $loop;
     }
 
-    public static function create(ReactEventLoop\LoopInterface $loop = NULL): EventLoop {
+    /**
+     * @param ReactEventLoopInterface|NULL $loop
+     * @return EventLoop
+     */
+    public static function create(ReactEventLoopInterface $loop = NULL): EventLoop {
       return new self(
         $loop ?? ReactEventLoop\Factory::create()
       );
@@ -31,13 +40,11 @@ namespace Carica\Io\React {
      */
     public static function get(): EventLoop {
       return EventLoop\Factory::get(
-        static function() {
-          return self::create();
-        }
+        static function() { return self::create(); }
       );
     }
 
-    public function getReactLoop(): ReactEventLoop\LoopInterface {
+    public function getReactLoop(): ReactEventLoopInterface {
       return $this->_loop;
     }
 
@@ -65,18 +72,24 @@ namespace Carica\Io\React {
      * @param callable $callback
      * @param resource $stream
      * @return EventListener
-     * @throws \Exception
+     * @throws Exception
      */
     public function setStreamReader(callable $callback, $stream): EventListener {
       $this->_loop->addReadStream($stream, $callback);
       return new LoopEvents\StreamReadEvent($this, $stream);
     }
 
+    /**
+     * @param EventListener $listener
+     */
     public function remove(EventListener $listener): void {
       $listener->remove();
     }
 
-    public function run(Io\Deferred\Promise $for = NULL): void {
+    /**
+     * @param Promise|NULL $for
+     */
+    public function run(Promise $for = NULL): void {
       $loop = $this->_loop;
       if (isset($for) && $for->state() === Io\Deferred::STATE_PENDING) {
         $for->always(

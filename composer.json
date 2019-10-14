@@ -1,5 +1,6 @@
 {
   "name": "carica/io-reactphp",
+  "description": "ReactPHP adapters for Carica\\Io",
   "license": "MIT",
   "autoload": {
     "psr-4": {

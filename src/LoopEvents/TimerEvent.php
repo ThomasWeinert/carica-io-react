@@ -17,7 +17,7 @@ namespace Carica\Io\React\LoopEvents {
     }
 
     public function remove(): void {
-      $this->getLoop()->reactLoop()->cancelTimer($this->_timer);
+      $this->getLoop()->getReactLoop()->cancelTimer($this->_timer);
     }
   }
 }
