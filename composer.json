@@ -1,0 +1,17 @@
+{
+  "name": "carica/io-reactphp",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Carica\\Io\\React\\": "src/"
+    }
+  },
+  "require": {
+    "php": ">=7.3",
+    "carica/io": "dev-master as 2.0.0",
+    "react/event-loop": "^1.1"
+  },
+  "require-dev": {
+    "roave/security-advisories": "dev-master"
+  }
+}
