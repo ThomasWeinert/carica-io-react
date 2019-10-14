@@ -91,7 +91,10 @@ namespace Carica\Io\React {
      */
     public function run(Promise $for = NULL): void {
       $loop = $this->_loop;
-      if (isset($for) && $for->state() === Io\Deferred::STATE_PENDING) {
+      if (NULL !== $for) {
+        if ($for->state() !== Io\Deferred::STATE_PENDING) {
+          return;
+        }
         $for->always(
           static function () use ($loop) {
             $loop->stop();
